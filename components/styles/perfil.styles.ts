@@ -4,61 +4,39 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#ffffff",
-    padding: 24,
   },
-  header: {
-    alignItems: "center",
-    marginTop: 40,
-    marginBottom: 40,
+  scrollContent: {
+    paddingBottom: 120, // Espaço para a Tab Bar flutuante
   },
-  avatarPlaceholder: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    backgroundColor: "#f3f4f6",
-    justifyContent: "center",
-    alignItems: "center",
+  section: {
+    marginTop: 32,
+    paddingHorizontal: 20,
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#000",
     marginBottom: 16,
   },
-  avatarText: {
-    fontSize: 36,
-    fontWeight: "bold",
-    color: "#9ca3af",
-  },
-  name: {
-    fontSize: 22,
-    fontWeight: "bold",
-    color: "#111827",
-  },
-  email: {
-    fontSize: 14,
-    color: "#6b7280",
-    marginTop: 4,
-  },
-  menu: {
-    flex: 1,
-  },
-  menuItem: {
-    backgroundColor: "#f3f4f6",
-    padding: 16,
-    borderRadius: 8,
-    marginBottom: 12,
-  },
-  menuItemText: {
-    fontSize: 16,
-    color: "#111827",
-  },
-  logoutButton: {
-    borderColor: "#ef4444",
-    borderWidth: 1,
-    padding: 16,
-    borderRadius: 8,
+  itemContainer: {
+    flexDirection: "row",
     alignItems: "center",
-    marginTop: 20,
+    paddingVertical: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: "#f0f0f0",
   },
-  logoutText: {
-    color: "#ef4444",
+  iconWrapper: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: "#f5f5f5",
+    justifyContent: "center",
+    alignItems: "center",
+    marginRight: 16,
+  },
+  itemText: {
+    flex: 1,
     fontSize: 16,
-    fontWeight: "bold",
+    color: "#333",
   },
 });

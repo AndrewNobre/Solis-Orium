@@ -17,7 +17,7 @@ export default function Welcome() {
   if (isAppLoading) {
     return (
       <FadeWrapper style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color="#F59E0B" />
+        <ActivityIndicator size="large" color="#fcad26" />
       </FadeWrapper>
     );
   }
