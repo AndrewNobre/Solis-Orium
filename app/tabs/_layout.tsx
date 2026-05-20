@@ -1,59 +1,77 @@
 import { Tabs } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import { View, Text } from "react-native";
 
 export default function TabsLayout() {
   return (
     <Tabs
       screenOptions={{
         headerShown: false,
-        tabBarShowLabel: false, // Escondemos o label padrão para fazer o nosso customizado
+        tabBarActiveTintColor: "#0f766e",
+        tabBarInactiveTintColor: "#64748b",
+        tabBarLabelStyle: {
+          fontSize: 11,
+          fontWeight: "600",
+          marginBottom: 4,
+        },
         tabBarStyle: {
           backgroundColor: "#ffffff",
-          position: "absolute",
-          bottom: 20,
-          left: 20,
-          right: 20,
-          borderRadius: 40,
-          height: 70,
+          height: 68,
           elevation: 5,
           shadowColor: "#000",
           shadowOffset: { width: 0, height: 4 },
           shadowOpacity: 0.1,
           shadowRadius: 10,
-          paddingBottom: 0,
+          paddingTop: 4,
           borderTopWidth: 0,
         },
       }}
     >
       <Tabs.Screen
-        name="integradores" // Supondo que seja a sua Home/Início
+        name="recarga"
         options={{
-          tabBarIcon: ({ focused }) => (
-            <Ionicons name={focused ? "home" : "home-outline"} size={24} color="#000" />
+          title: "Recarga",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="flash" size={size} color={color} />
           ),
         }}
       />
-      
-      {/* Adicione outras abas conforme necessário (Mensagens, Notificações) */}
+
+      <Tabs.Screen
+        name="reservas"
+        options={{
+          title: "Reservas",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="calendar" size={size} color={color} />
+          ),
+        }}
+      />
+
+      <Tabs.Screen
+        name="integradores"
+        options={{
+          title: "Solar",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="sunny" size={size} color={color} />
+          ),
+        }}
+      />
+
+      <Tabs.Screen
+        name="iot"
+        options={{
+          title: "IoT",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="hardware-chip" size={size} color={color} />
+          ),
+        }}
+      />
 
       <Tabs.Screen
         name="perfil"
         options={{
-          tabBarIcon: ({ focused }) => (
-            <View style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              backgroundColor: focused ? '#000' : 'transparent',
-              paddingVertical: 8,
-              paddingHorizontal: 16,
-              borderRadius: 20,
-            }}>
-              <Ionicons name="person" size={20} color={focused ? "#f30a0a" : "#000"} />
-              {focused && (
-                <Text style={{ color: '#fff', marginLeft: 8, fontWeight: 'bold' }}>Perfil</Text>
-              )}
-            </View>
+          title: "Perfil",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="person" size={size} color={color} />
           ),
         }}
       />
