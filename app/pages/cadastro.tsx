@@ -41,7 +41,7 @@ export default function Cadastro() {
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
-      router.replace("/tabs/integradores");
+      router.replace("/tabs/integradores"); // <-- CAMINHO CORRETO
     }, 1500);
   };
 

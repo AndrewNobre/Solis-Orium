@@ -20,7 +20,7 @@ export default function Login() {
     
     setTimeout(() => {
       setIsLoading(false);
-      router.replace("/tabs/integradores");
+      router.replace("/tabs/integradores"); // <-- CAMINHO CORRETO
     }, 1500);
   };
 

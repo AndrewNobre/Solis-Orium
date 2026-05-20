@@ -4,8 +4,8 @@ import { ViewProps } from "react-native";
 export default function FadeWrapper({ children, style }: ViewProps) {
   return (
     <Animated.View
-      entering={FadeIn.duration(1000)} // Entrada suave (meio segundo)
-      exiting={FadeOut.duration(800)} // Saída mais rápida
+      entering={FadeIn.duration(500)} // Entrada suave (meio segundo)
+      exiting={FadeOut.duration(300)} // Saída mais rápida
       style={[{ flex: 1 }, style]}
     >
       {children}
