@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { Text, TextInput, TouchableOpacity, View, ActivityIndicator } from "react-native";
+import FadeWrapper from "@/components/transitions/FadeWrapper";
 import { router } from "expo-router";
-import FadeWrapper from "@/components/transitions/FadeWrapper"; 
+import React, { useState } from "react";
+import { ActivityIndicator, Text, TextInput, TouchableOpacity, View } from "react-native";
 // Importação do arquivo de estilos separado
-import { styles } from "../../components/styles/login.styles"; 
+import { styles } from "../../components/styles/login.styles";
 
 export default function Login() {
   const [perfil, setPerfil] = useState<"cliente" | "integrador" | "ponto">("cliente");
@@ -20,7 +20,7 @@ export default function Login() {
     
     setTimeout(() => {
       setIsLoading(false);
-      router.replace("./tabs/integradores");
+      router.replace("/tabs/integradores");
     }, 1500);
   };
 
@@ -69,7 +69,7 @@ export default function Login() {
         )}
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.linkButton} onPress={() => router.push("./pages/cadastro")} disabled={isLoading}>
+      <TouchableOpacity style={styles.linkButton} onPress={() => router.push("/pages/cadastro")} disabled={isLoading}>
         <Text style={styles.linkText}>Não tem conta? Cadastre-se</Text>
       </TouchableOpacity>
     </FadeWrapper>

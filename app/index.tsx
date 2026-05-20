@@ -35,7 +35,7 @@ export default function Welcome() {
       </View>
 
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.primaryButton} onPress={() => router.push("./pages/login")}>
+        <TouchableOpacity style={styles.primaryButton} onPress={() => router.push("/pages/login")}>
           <Text style={styles.primaryButtonText}>Começar</Text>
         </TouchableOpacity>
       </View>
