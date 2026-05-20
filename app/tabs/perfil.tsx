@@ -25,39 +25,42 @@ export default function Perfil() {
   return (
     <FadeWrapper style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
-        
-        {/* Seção: Mais informações */}
+        <View style={styles.hero}>
+          <View>
+            <Text style={styles.heroName}>Joao Victor</Text>
+            <Text style={styles.heroEmail}>joao@email.com</Text>
+          </View>
+          <View style={styles.roleBadge}>
+            <Text style={styles.roleBadgeText}>Cliente</Text>
+          </View>
+        </View>
+
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Mais informações</Text>
+          <Text style={styles.sectionTitle}>Conta e Veiculos</Text>
           <ProfileItem icon="person-outline" label="Meus dados" />
-          <ProfileItem icon="help-circle-outline" label="Central de ajuda" />
-          <ProfileItem icon="swap-horizontal-outline" label="Pedir limite" />
+          <ProfileItem icon="car-outline" label="Meus veiculos eletricos" />
+          <ProfileItem icon="refresh-outline" label="Recuperacao de senha" />
         </View>
 
-        {/* Seção: Documentos */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Documentos</Text>
-          <ProfileItem icon="document-text-outline" label="Contrato" />
-          <ProfileItem icon="shield-checkmark-outline" label="Políticas de privacidade" />
+          <Text style={styles.sectionTitle}>Financeiro e Reservas</Text>
+          <ProfileItem icon="calendar-outline" label="Historico de reservas" />
+          <ProfileItem icon="wallet-outline" label="Historico financeiro" />
           <ProfileItem icon="receipt-outline" label="Comprovantes" />
-          <ProfileItem icon="calculator-outline" label="Tarifas" />
+          <ProfileItem icon="qr-code-outline" label="QR Codes de reservas" />
         </View>
 
-        {/* Seção: Institucional */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Institucional</Text>
-          <ProfileItem icon="globe-outline" label="Site Solis Orium" />
-          <ProfileItem icon="logo-instagram" label="Instagram" />
-          <ProfileItem icon="star-outline" label="Avaliar app" />
+          <Text style={styles.sectionTitle}>Servicos e Suporte</Text>
+          <ProfileItem icon="star-outline" label="Avaliacoes e comentarios" />
+          <ProfileItem icon="help-circle-outline" label="Central de ajuda" />
+          <ProfileItem icon="shield-checkmark-outline" label="Politica de privacidade" />
           <ProfileItem 
             icon="log-out-outline" 
             label="Sair do aplicativo" 
             onPress={() => router.replace("/pages/login")} 
           />
         </View>
-
-        
-
       </ScrollView>
     </FadeWrapper>
   );
