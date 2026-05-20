@@ -20,7 +20,7 @@ export default function Login() {
     
     setTimeout(() => {
       setIsLoading(false);
-      router.replace("/(tabs modal)/integradores");
+      router.replace("./tabs/integradores");
     }, 1500);
   };
 
@@ -69,7 +69,7 @@ export default function Login() {
         )}
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.linkButton} onPress={() => router.push("/pages/cadastro")} disabled={isLoading}>
+      <TouchableOpacity style={styles.linkButton} onPress={() => router.push("./pages/cadastro")} disabled={isLoading}>
         <Text style={styles.linkText}>Não tem conta? Cadastre-se</Text>
       </TouchableOpacity>
     </FadeWrapper>
