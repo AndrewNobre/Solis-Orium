@@ -4,10 +4,29 @@ export const mockDatabase = {
   usuarios: [
     {
       id: 1,
-      nome: "Usuário Teste",
-      email: "teste@solisorium.com",
+      nome: "Usuário Cliente",
+      email: "adm",
+      senha: "123",
       cpf: "111.222.333-44",
       tipo: "cliente"
+    }
+  ],
+  empresas: [
+    {
+      id: 1,
+      nome: "Empresa Integrador Teste",
+      email: "adm",
+      senha: "123",
+      cnpj: "11.222.333/0001-44", // CNPJ de teste para integrador
+      tipo: "integrador"
+    },
+    {
+      id: 2,
+      nome: "Posto de Recarga Teste",
+      email: "adm",
+      senha: "123",
+      cnpj: "55.666.777/0001-88", // CNPJ de teste para ponto
+      tipo: "ponto"
     }
   ],
   veiculos: [
@@ -22,26 +41,9 @@ export const mockDatabase = {
     }
   ],
   pontos_de_recarga: [
-    {
-      id: 1,
-      empresa_id: 1,
-      nome: "EletroPosto Centro",
-      latitude: -3.119027,
-      longitude: -60.021731,
-      potencia_kw: 50,
-      valor_kwh: 1.50,
-      status: "disponível"
-    },
-    {
-      id: 2,
-      empresa_id: 2,
-      nome: "Shopping Solar",
-      latitude: -3.098412,
-      longitude: -60.023190,
-      potencia_kw: 22,
-      valor_kwh: 1.20,
-      status: "ocupado"
-    }
+    { id: "1", nome: "Estação Centro Sul", distanciaKm: 1.4, potenciaKw: 60, preco: 1.95, conector: "CCS2", status: "Disponivel", latitude: -23.5505, longitude: -46.6333 },
+    { id: "2", nome: "Hub Solar Campinas", distanciaKm: 3.1, potenciaKw: 22, preco: 1.45, conector: "Tipo 2", status: "Em uso", latitude: -23.5308, longitude: -46.6395 },
+    { id: "3", nome: "Eletro Park Norte", distanciaKm: 4.8, potenciaKw: 50, preco: 1.85, conector: "CCS2", status: "Disponivel", latitude: -23.5134, longitude: -46.6531 },
   ],
   reservas: []
 };
