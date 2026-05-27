@@ -14,11 +14,11 @@ interface PontoRecarga extends MapPonto {
 }
 
 const PONTOS: PontoRecarga[] = [
-  { id: "1", nome: "Estacao Centro Sul",    distanciaKm: 1.4, potenciaKw: 60, preco: 1.95, conector: "CCS2",    status: "Disponivel", latitude: -23.5505, longitude: -46.6333 },
-  { id: "2", nome: "Hub Solar Campinas",    distanciaKm: 3.1, potenciaKw: 22, preco: 1.45, conector: "Tipo 2",  status: "Em uso",     latitude: -23.5308, longitude: -46.6395 },
-  { id: "3", nome: "Eletro Park Norte",     distanciaKm: 4.8, potenciaKw: 50, preco: 1.85, conector: "CCS2",    status: "Disponivel", latitude: -23.5134, longitude: -46.6531 },
-  { id: "4", nome: "Shopping Verde",        distanciaKm: 7.2, potenciaKw: 40, preco: 1.65, conector: "CHAdeMO", status: "Manutencao", latitude: -23.5620, longitude: -46.6558 },
-  { id: "5", nome: "Condominio Solis Prime",distanciaKm: 9.6, potenciaKw: 11, preco: 1.20, conector: "Tipo 2",  status: "Disponivel", latitude: -23.5740, longitude: -46.6173 },
+  { id: "1", nome: "Estacao Centro Sul", distanciaKm: 1.4, potenciaKw: 60, preco: 1.95, conector: "CCS2", status: "Disponivel", latitude: -23.5505, longitude: -46.6333 },
+  { id: "2", nome: "Hub Solar Campinas", distanciaKm: 3.1, potenciaKw: 22, preco: 1.45, conector: "Tipo 2", status: "Em uso", latitude: -23.5308, longitude: -46.6395 },
+  { id: "3", nome: "Eletro Park Norte", distanciaKm: 4.8, potenciaKw: 50, preco: 1.85, conector: "CCS2", status: "Disponivel", latitude: -23.5134, longitude: -46.6531 },
+  { id: "4", nome: "Shopping Verde", distanciaKm: 7.2, potenciaKw: 40, preco: 1.65, conector: "CHAdeMO", status: "Manutencao", latitude: -23.5620, longitude: -46.6558 },
+  { id: "5", nome: "Condominio Solis Prime", distanciaKm: 9.6, potenciaKw: 11, preco: 1.20, conector: "Tipo 2", status: "Disponivel", latitude: -23.5740, longitude: -46.6173 },
 ];
 
 const statusColor: Record<Status, string> = {
@@ -31,7 +31,7 @@ export default function Recarga() {
   const [busca, setBusca] = useState("");
   const [filtroConector, setFiltroConector] = useState<Conector | "Todos">("Todos");
   const [selecionado, setSelecionado] = useState<string | null>(null);
-  const listRef = useRef<FlatList>(null);
+  const listRef = useRef<FlatList<PontoRecarga>>(null);
 
   const pontosFiltrados = useMemo(() => {
     return PONTOS.filter((ponto) => {
@@ -105,11 +105,11 @@ export default function Recarga() {
       <FlatList
         ref={listRef}
         data={pontosFiltrados}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item: PontoRecarga) => item.id}
         contentContainerStyle={styles.content}
         showsVerticalScrollIndicator={false}
-        onScrollToIndexFailed={() => {}}
-        renderItem={({ item }) => (
+        onScrollToIndexFailed={() => { }}
+        renderItem={({ item }: { item: PontoRecarga }) => (
           <TouchableOpacity
             style={[styles.card, selecionado === item.id && styles.cardSelected]}
             onPress={() => handleCardPress(item)}
