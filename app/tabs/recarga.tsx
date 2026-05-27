@@ -1,9 +1,10 @@
-import React, { useRef, useMemo, useState } from "react";
-import { FlatList, Text, TextInput, TouchableOpacity, View } from "react-native";
+import React, { useRef, useMemo, useState, useEffect } from "react";
+import { FlatList, Text, TextInput, TouchableOpacity, View, ActivityIndicator } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import FadeWrapper from "@/components/transitions/FadeWrapper";
 import RecargaMap, { MapPonto } from "@/components/RecargaMap";
 import { styles } from "@/components/styles/recarga.styles";
+import { DatabaseAPI } from "../../database/api";
 
 type Conector = "CCS2" | "Tipo 2" | "CHAdeMO";
 type Status = MapPonto["status"];
@@ -12,14 +13,6 @@ interface PontoRecarga extends MapPonto {
   distanciaKm: number;
   conector: Conector;
 }
-
-const PONTOS: PontoRecarga[] = [
-  { id: "1", nome: "Estacao Centro Sul", distanciaKm: 1.4, potenciaKw: 60, preco: 1.95, conector: "CCS2", status: "Disponivel", latitude: -23.5505, longitude: -46.6333 },
-  { id: "2", nome: "Hub Solar Campinas", distanciaKm: 3.1, potenciaKw: 22, preco: 1.45, conector: "Tipo 2", status: "Em uso", latitude: -23.5308, longitude: -46.6395 },
-  { id: "3", nome: "Eletro Park Norte", distanciaKm: 4.8, potenciaKw: 50, preco: 1.85, conector: "CCS2", status: "Disponivel", latitude: -23.5134, longitude: -46.6531 },
-  { id: "4", nome: "Shopping Verde", distanciaKm: 7.2, potenciaKw: 40, preco: 1.65, conector: "CHAdeMO", status: "Manutencao", latitude: -23.5620, longitude: -46.6558 },
-  { id: "5", nome: "Condominio Solis Prime", distanciaKm: 9.6, potenciaKw: 11, preco: 1.20, conector: "Tipo 2", status: "Disponivel", latitude: -23.5740, longitude: -46.6173 },
-];
 
 const statusColor: Record<Status, string> = {
   Disponivel: "#16a34a",
@@ -31,15 +24,31 @@ export default function Recarga() {
   const [busca, setBusca] = useState("");
   const [filtroConector, setFiltroConector] = useState<Conector | "Todos">("Todos");
   const [selecionado, setSelecionado] = useState<string | null>(null);
+  
+  // Novos estados para o banco de dados
+  const [pontosDB, setPontosDB] = useState<PontoRecarga[]>([]);
+  const [carregando, setCarregando] = useState(true);
+  
   const listRef = useRef<FlatList<PontoRecarga>>(null);
 
+  // Busca os dados da API simulada ao abrir a aba
+  useEffect(() => {
+    async function carregarDados() {
+      const dados = await DatabaseAPI.getPontosRecarga();
+      setPontosDB(dados as PontoRecarga[]);
+      setCarregando(false);
+    }
+    carregarDados();
+  }, []);
+
+  // Usa os dados que vieram do BD (pontosDB) em vez da lista fixa
   const pontosFiltrados = useMemo(() => {
-    return PONTOS.filter((ponto) => {
+    return pontosDB.filter((ponto) => {
       const matchBusca = ponto.nome.toLowerCase().includes(busca.toLowerCase());
       const matchConector = filtroConector === "Todos" || ponto.conector === filtroConector;
       return matchBusca && matchConector;
     }).sort((a, b) => a.distanciaKm - b.distanciaKm);
-  }, [busca, filtroConector]);
+  }, [busca, filtroConector, pontosDB]);
 
   const handleMarkerPress = (ponto: MapPonto) => {
     setSelecionado(ponto.id);
@@ -51,6 +60,16 @@ export default function Recarga() {
     setSelecionado(ponto.id);
   };
 
+  // Mostra um spinner enquanto baixa os dados
+  if (carregando) {
+    return (
+      <FadeWrapper style={[styles.container, { justifyContent: 'center', alignItems: 'center' }]}>
+        <ActivityIndicator size="large" color="#0f766e" />
+        <Text style={{ marginTop: 12, color: "#64748b" }}>Buscando estações...</Text>
+      </FadeWrapper>
+    );
+  }
+
   return (
     <FadeWrapper style={styles.container}>
       {/* Header */}
@@ -61,7 +80,7 @@ export default function Recarga() {
 
       {/* Mapa */}
       <RecargaMap
-        pontos={PONTOS}
+        pontos={pontosDB}
         selectedId={selecionado}
         onMarkerPress={handleMarkerPress}
       />
